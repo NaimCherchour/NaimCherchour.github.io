@@ -1,0 +1,143 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+  }
+  
+  body {
+	font-family: Arial, sans-serif;
+	background: #fefefe;
+	color: #333;
+  }
+  
+  header {
+	background: #222;
+	padding: 1em;
+  }
+  
+  .navbar {
+	max-width: 1100px;
+	margin: 0 auto;
+  }
+  
+  .nav-list {
+	display: flex;
+	list-style: none;
+	justify-content: center;
+  }
+  
+  .nav-list li {
+	margin: 0 1em;
+  }
+  
+  .nav-list a {
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+  }
+  
+  .nav-list a:hover {
+	color: #ffbe0b;
+  }
+  
+  .section {
+	max-width: 800px;
+	margin: 2em auto;
+	padding: 0 1em;
+	text-align: center;
+  }
+  
+  .section img {
+	max-width: 300px;
+	margin-top: 1em;
+	border-radius: 0.5em;
+  }
+  
+  .skill-group {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	gap: 1em;
+  }
+  
+  .skill-box {
+	background: #e4e4e4;
+	padding: 1em;
+	border-radius: 0.5em;
+	width: 250px;
+	text-align: left;
+  }
+  
+  .skill-box h3 {
+	margin-bottom: 0.5em;
+  }
+  
+  .projects-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1em;
+  }
+  
+  .project-item {
+	background: #fafafa;
+	padding: 1em;
+	border-radius: 0.5em;
+  }
+  
+  footer {
+	background: #222;
+	color: #fff;
+	text-align: center;
+	padding: 1em 0;
+	margin-top: 2em;
+  }
+
+/* Timeline styling */
+.timeline {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  padding: 2em 0;
+}
+
+.timeline-item {
+  position: relative;
+  margin: 2em 0;
+  padding-left: 3em; /* space for the line and icon */
+}
+
+.timeline-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 1.2em; /* matches timeline-icon position */
+  top: 3em;
+  bottom: -2em;
+  width: 2px;
+  background: linear-gradient(to bottom, #ccc, #999);
+  border-radius: 2px;
+}
+
+.timeline-icon {
+  position: absolute;
+  left: 0.7em; /* horizontally center the dot */
+  top: 0.7em;
+  width: 1em;
+  height: 1em;
+  background: #ffbe0b;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px #222;
+}
+
+.timeline-content {
+  background: #318def;
+  padding: 1em;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.school-logo {
+  height: 24px;
+  width: auto;
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
