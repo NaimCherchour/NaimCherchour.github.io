@@ -9,52 +9,75 @@ body, html {
   font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #0a192f;
   color: #ccd6f6;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   overflow-y: scroll;
   scroll-behavior: smooth;
 }
 
 /* Navigation */
-.navbar {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  background: rgba(10, 25, 47, 0.85);
+.navbar.fixed-top { 
+  background: rgba(10, 25, 47, 0.85) ;
   backdrop-filter: blur(10px);
-  padding: 1rem 2rem;
-  z-index: 1000;
   border-bottom: 1px solid #133050;
-  display: flex; 
-  justify-content: center;
-  align-items: center;
-
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
-.nav-list {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
-  padding: 0;
-  margin: 0;
-
+.navbar-brand {
+  color: #e6f1ff !important;
+  font-family: 'Roboto Mono', 'SF Mono', 'Fira Code', 'monospace';
+  font-weight: 500;
+}
+.navbar-brand:hover {
+  color: #64ffda !important;
 }
 
-.nav-list a {
-  color: #ccd6f6;
-  text-decoration: none;
+.navbar-dark .navbar-toggler {
+  border-color: rgba(100, 255, 218, 0.5);
+}
+
+.navbar-dark .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(100, 255, 218, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-nav .nav-link {
+  color: #ccd6f6 !important;
   font-weight: 500;
   font-family: 'Roboto Mono', 'SF Mono', 'Fira Code', 'monospace';
   font-size: 0.9rem;
   transition: color 0.3s ease, transform 0.3s ease;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-.nav-list a:hover, .nav-list a.active {
-  color: #64ffda;
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #64ffda !important;
   transform: translateY(-2px);
 }
 
-/* Sections */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background-color: rgba(10, 25, 47, 0.95);
+    border-top: 1px solid #133050;
+    margin-top: 0.5rem;
+    padding: 1rem;
+    border-radius: 4px;
+  }
+  .navbar-nav .nav-item {
+    margin-bottom: 0.5rem;
+  }
+  .navbar-nav .nav-link {
+    display: block;
+    text-align: center;
+  }
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link.active {
+    transform: none;
+  }
+}
 
+/* Sections */
 .section {
   height: 100vh;
   padding: 80px 5% 40px;
@@ -67,39 +90,38 @@ body, html {
 }
 
 #home.section {
-  flex-direction: row; /* Arrange children (text wrapper and image) in a row */
-  justify-content: center; /* Center the content horizontally */
-  align-items: center;    /* Center the content vertically */
-  gap: 2rem; /* Add some space between the text and the image */
-  text-align: left; /* Align text to the left within its container */
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  text-align: left;
 }
 
 .home-content-wrapper {
   display: flex;
-  flex-direction: row; /* Default, but explicit */
-  align-items: center; /* Vertically align text and image */
-  justify-content: center; /* Center the group if the section is wider */
-  gap: 3rem; /* Space between text block and image */
-  max-width: 1100px; /* Optional: constrain the max width of this group */
-  width: 100%; /* Try to use available width */
-  padding: 0 2rem; /* Add some padding if needed */
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  max-width: 1100px;
+  width: 100%;
+  padding: 0 2rem;
 }
 
 .home-text {
-  flex: 1 1 60%; /* Allow text to take more space, adjust as needed */
-  max-width: 600px; /* Max width for readability */
+  flex: 1 1 60%;
+  max-width: 600px;
 }
 
 
 #home p {
   text-align: center;
-  font-size: 1.1rem; /* Adjust font size for better readability */
-  line-height: 1.2; /* Increase line height for better readability */
-  color: #8892b0; /* Change color for better contrast */
-  margin-top: 2rem; /* Add some space above the paragraph */
-  margin-bottom: 2rem; /* Add some space below the paragraph */
+  font-size: 1.1rem;
+  line-height: 1.2;
+  color: #8892b0;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  /* animation to appear after the title */
 }
 
 
@@ -282,4 +304,130 @@ p { line-height: 1.6; margin-bottom: 1rem; max-width: 650px; }
 @keyframes blink {
   from, to { opacity: 1; }
   50% { opacity: 0; }
+}
+
+#contact {
+  height: 100vh;
+  padding: 60px 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  scroll-snap-align: start;
+  background-color: #0a192f;
+  color: #ccd6f6;
+}
+
+.contact-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.contact-header h2 {
+  margin-top: 3rem;
+  font-size: 2rem;
+  color: #64ffda;
+  margin-bottom: 1rem;}
+
+.contact-header p {
+  font-size: 1.1rem;
+  color: #a8b2d1;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+#contact .lead {
+  font-size: 1rem;
+  color: #a8b2d1;
+  margin-bottom: 2rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.social-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #112240;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: #ccd6f6;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: #64ffda;
+  color: #0a192f;
+  transform: translateY(-5px);
+}
+
+.contact-form {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.contact-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #1e3b63;
+  border-radius: 4px;
+  background-color: #112240;
+  color: #ccd6f6;
+  font-size: 1rem;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #8892b0;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #64ffda;
+}
+
+.contact-form button {
+  background-color: #64ffda;
+  color: #0a192f;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #52e0c4;
+}
+
+#contact.section {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+@media (max-height: 700px) {
+  #contact {
+    height: auto;
+    min-height: 100vh;
+    justify-content: flex-start;
+  }
 }

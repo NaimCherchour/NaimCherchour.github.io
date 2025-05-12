@@ -1,4 +1,3 @@
-// Animate sections when they enter the viewport
 document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll(".section");
   const navLinks = document.querySelectorAll('.nav-list a');
@@ -21,42 +20,35 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (entry.intersectionRatio > 0.5) {
           const currentSectionId = entry.target.id;
           if (window.location.hash !== `#${currentSectionId}`) {
-            // Use replaceState to avoid polluting history and prevent scroll jumps
             history.replaceState(null, null, `#${currentSectionId}`);
           }
           updateActiveNavLink(currentSectionId);
         }
 
-        // If the intersecting section is the home section, start typewriter (only once)
         if (entry.target.id === 'home' && !typewriterInitialized) {
           const homeH1 = entry.target.querySelector('h1');
           if (homeH1) {
-            const textToType = "Hello, I'm Naim Cherchour"; // Or get from homeH1.textContent if it's static
+            const textToType = "Hello, I'm Naim Cherchour";
             typeWriter(homeH1, textToType, 100);
-            typewriterInitialized = true; // Set flag to prevent re-running
+            typewriterInitialized = true;
           }
         }
       } else {
-        // Optional: If you want animations to pause or reset when out of view
-        // entry.target.style.animationPlayState = "paused";
+        entry.target.style.animationPlayState = "paused";
       }
     });
   }, {
-    threshold: [0.5, 0.6, 0.7] // Fire when 50%, 60%, 70% of the section is visible.
-                               // This helps in accurately determining the "active" section.
-                               // The 0.6 was your original for animation.
-                               // Using multiple thresholds, especially around 0.5, is good for this.
+    threshold: [0.5, 0.6, 0.7]
   });
 
   sections.forEach(section => {
-    section.style.animationPlayState = "paused"; // Keep animation paused initially
+    section.style.animationPlayState = "paused";
     observer.observe(section);
   });
 
   function typeWriter(element, text, speed) {
     element.textContent = '';
     let i = 0;
-    // Add a cursor span
     const cursorSpan = document.createElement('span');
     cursorSpan.classList.add('typewriter-cursor');
     cursorSpan.textContent = '|';
@@ -74,24 +66,52 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     type();
   }
+  document.querySelectorAll('a.nav-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      const targetSection = document.getElementById(targetId);
+      targetSection.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
 
-  // Set initial active link on page load
+
+
+  const contactForm = document.getElementById("contact-form");
+
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+  
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+  
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, subject, message })
+    });
+  
+    const result = await response.json();
+  
+    if (response.ok) {
+      alert("Message sent successfully!");
+      contactForm.reset();
+    } else {
+      alert("Failed to send message: " + result.message);
+    }
+  });
+
   function setInitialActiveState() {
     let currentHash = window.location.hash;
     if (currentHash) {
       updateActiveNavLink(currentHash.substring(1));
     } else if (sections.length > 0) {
-      // If no hash, make the first section active by default
       updateActiveNavLink(sections[0].id);
-      // Optionally set the hash for the first section
-      // history.replaceState(null, null, `#${sections[0].id}`);
+      history.replaceState(null, null, `#${sections[0].id}`);
     }
   }
   setInitialActiveState();
-
-  // Listen for hash changes (e.g., browser back/forward buttons)
-  // and update active link accordingly.
-  // Note: This might be redundant if the observer correctly handles all transitions,
-  // but it's good for explicit hash changes.
   window.addEventListener('hashchange', setInitialActiveState, false);
 });
