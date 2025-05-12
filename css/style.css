@@ -1,143 +1,285 @@
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-  }
-  
-  body {
-	font-family: Arial, sans-serif;
-	background: #fefefe;
-	color: #333;
-  }
-  
-  header {
-	background: #222;
-	padding: 1em;
-  }
-  
-  .navbar {
-	max-width: 1100px;
-	margin: 0 auto;
-  }
-  
-  .nav-list {
-	display: flex;
-	list-style: none;
-	justify-content: center;
-  }
-  
-  .nav-list li {
-	margin: 0 1em;
-  }
-  
-  .nav-list a {
-	color: #fff;
-	text-decoration: none;
-	font-weight: bold;
-  }
-  
-  .nav-list a:hover {
-	color: #ffbe0b;
-  }
-  
-  .section {
-	max-width: 800px;
-	margin: 2em auto;
-	padding: 0 1em;
-	text-align: center;
-  }
-  
-  .section img {
-	max-width: 300px;
-	margin-top: 1em;
-	border-radius: 0.5em;
-  }
-  
-  .skill-group {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	gap: 1em;
-  }
-  
-  .skill-box {
-	background: #e4e4e4;
-	padding: 1em;
-	border-radius: 0.5em;
-	width: 250px;
-	text-align: left;
-  }
-  
-  .skill-box h3 {
-	margin-bottom: 0.5em;
-  }
-  
-  .projects-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 1em;
-  }
-  
-  .project-item {
-	background: #fafafa;
-	padding: 1em;
-	border-radius: 0.5em;
-  }
-  
-  footer {
-	background: #222;
-	color: #fff;
-	text-align: center;
-	padding: 1em 0;
-	margin-top: 2em;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/* Timeline styling */
+body, html {
+  height: 100%;
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0a192f;
+  color: #ccd6f6;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+/* Navigation */
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: rgba(10, 25, 47, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  z-index: 1000;
+  border-bottom: 1px solid #133050;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+
+}
+
+.nav-list a {
+  color: #ccd6f6;
+  text-decoration: none;
+  font-weight: 500;
+  font-family: 'Roboto Mono', 'SF Mono', 'Fira Code', 'monospace';
+  font-size: 0.9rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-list a:hover, .nav-list a.active {
+  color: #64ffda;
+  transform: translateY(-2px);
+}
+
+/* Sections */
+
+.section {
+  height: 100vh;
+  padding: 80px 5% 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+#home.section {
+  flex-direction: row; /* Arrange children (text wrapper and image) in a row */
+  justify-content: center; /* Center the content horizontally */
+  align-items: center;    /* Center the content vertically */
+  gap: 2rem; /* Add some space between the text and the image */
+  text-align: left; /* Align text to the left within its container */
+}
+
+.home-content-wrapper {
+  display: flex;
+  flex-direction: row; /* Default, but explicit */
+  align-items: center; /* Vertically align text and image */
+  justify-content: center; /* Center the group if the section is wider */
+  gap: 3rem; /* Space between text block and image */
+  max-width: 1100px; /* Optional: constrain the max width of this group */
+  width: 100%; /* Try to use available width */
+  padding: 0 2rem; /* Add some padding if needed */
+}
+
+.home-text {
+  flex: 1 1 60%; /* Allow text to take more space, adjust as needed */
+  max-width: 600px; /* Max width for readability */
+}
+
+
+#home p {
+  text-align: center;
+  font-size: 1.1rem; /* Adjust font size for better readability */
+  line-height: 1.2; /* Increase line height for better readability */
+  color: #8892b0; /* Change color for better contrast */
+  margin-top: 2rem; /* Add some space above the paragraph */
+  margin-bottom: 2rem; /* Add some space below the paragraph */
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* animation to appear after the title */
+}
+
+
+.portrait-img {
+  width: 260px;
+  height: 350px;
+  margin-top: 20px;
+  box-shadow: 0 0 25px rgba(100, 255, 218, 0.3);
+}
+
+#home { background-color: #0a192f; }
+#academic-journey { background-color: #0b1a31; }
+#projects { background-color: #0a192f; }
+#skills { background-color: #0b1a31; }
+#Certifications { background-color: #0a192f; }
+#about { background-color: #0b1a31; }
+#contact { background-color: #0a192f; }
+
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  color: #e6f1ff;
+  margin-bottom: 1rem;
+  font-family: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
+}
+h1 { font-size: clamp(40px, 8vw, 80px); color: #e6f1ff;}
+h2 { font-size: clamp(30px, 5vw, 40px); color: #64ffda; margin-bottom: 2rem;}
+h3 { font-size: 1.5rem; color: #ccd6f6;}
+p { line-height: 1.6; margin-bottom: 1rem; max-width: 650px; }
+
+
 .timeline {
   position: relative;
-  width: 80%;
-  margin: 0 auto;
-  padding: 2em 0;
+  max-width: 700px;
+  margin: 20px auto;
 }
-
 .timeline-item {
+  margin: 2rem 0;
+  padding-left: 2.5rem;
   position: relative;
-  margin: 2em 0;
-  padding-left: 3em; /* space for the line and icon */
 }
 
-.timeline-item:not(:last-child)::after {
-  content: "";
+.timeline-item::before {
+  content: '';
   position: absolute;
-  left: 1.2em; /* matches timeline-icon position */
-  top: 3em;
-  bottom: -2em;
+  left: 0;
+  top: 5px;
+  height: 100%;
   width: 2px;
-  background: linear-gradient(to bottom, #ccc, #999);
-  border-radius: 2px;
+  background-color: #1e3b63;
 }
-
-.timeline-icon {
+.timeline-item::after {
+  content: '';
   position: absolute;
-  left: 0.7em; /* horizontally center the dot */
-  top: 0.7em;
-  width: 1em;
-  height: 1em;
-  background: #ffbe0b;
+  left: -7px;
+  top: 5px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  box-shadow: 0 0 0 3px #222;
-}
-
-.timeline-content {
-  background: #318def;
-  padding: 1em;
-  border-radius: 0.5em;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: #64ffda;
+  border: 3px solid #0a192f;
+  z-index: 1;
 }
 
 .school-logo {
   height: 24px;
-  width: auto;
+  margin-right: 10px;
   vertical-align: middle;
-  margin-right: 0.5em;
+  background-color: #ccd6f6;
+  border-radius: 3px;
+  padding: 2px;
+}
+.timeline-content h3 a {
+    color: #e6f1ff;
+    text-decoration: none;
+}
+.timeline-content h3 a:hover {
+    color: #64ffda ;
+}
+.timeline-content ul {
+    list-style-type: none ;
+    padding-left: 0;
+}
+.timeline-content ul li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+.timeline-content ul li strong {
+    color: #8892b0;
+}
+
+/* Projects  */
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.project-item {
+  flex: 1 1 300px ;
+  max-width: 350px;
+  background: #112240;
+  padding: 1.5rem;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  border: 1px solid #1e3b63;
+}
+
+.project-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 30px -15px rgba(2,12,27,0.7);
+}
+.project-item h3 {
+    color:  #64ffda;
+    margin-bottom : 0.75rem;
+}
+
+/* Skills  */
+.skill-group {
+  display : flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.skill-box {
+  flex: 1 1 300px;
+  max-width: 350px;
+  background: #112240;
+  padding: 1.5rem;
+  border-left: 4px solid #64ffda;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+}
+
+
+.skill-box h3 {
+    color: #ccd6f6;
+    margin-bottom: 1rem;
+}
+.skill-box ul {
+    list-style-position: inside;
+    padding-left: 0;
+}
+.skill-box ul li {
+    margin-bottom: 0.5rem;
+    color: #8892b0;
+}
+
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a192f;
+}
+::-webkit-scrollbar-thumb {
+  background: #133050;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64ffda;
+}
+
+/* Typewriter Cursor */
+.typewriter-cursor {
+  color: #64ffda;
+  font-weight: bold;
+}
+
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
 }
